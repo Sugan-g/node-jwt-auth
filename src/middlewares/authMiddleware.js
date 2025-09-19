@@ -23,8 +23,11 @@ export const authUser = async (req, res, next) => {
             });
         }
 
-        const actualToken = authHeader.split(" ")[1];
-        console.log("🔹 Extracted Token:", actualToken);
+        // Split the header to get the token
+        const parts = authHeader.split(" "); // ["Bearer", "<token>"]
+        const actualToken = parts[1].startsWith("Bearer") ? parts[1].split(" ")[1] : parts[1];
+
+        console.log("Extracted Token:", actualToken);
 
         let decoded;
         try {

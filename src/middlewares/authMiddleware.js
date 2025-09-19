@@ -26,7 +26,10 @@ export const authUser = async (req, res, next) => {
         // Split the header to get the token
         const parts = authHeader.split(" "); // ["Bearer", "<token>"]
         const actualToken = parts[1];
-
+        // Remove extra "Bearer" if present
+        if (actualToken.startsWith("Bearer")) {
+            actualToken = actualToken.slice(7);
+        }
         console.log("Extracted Token:", actualToken);
 
         let decoded;

@@ -25,13 +25,13 @@ export const authUser = async (req, res, next) => {
 
         // Split the header to get the token
         const parts = authHeader.split(" "); // ["Bearer", "<token>"]
-        const actualToken = parts[1].startsWith("Bearer") ? parts[1].split(" ")[1] : parts[1];
+        const actualToken = parts[1];
 
         console.log("Extracted Token:", actualToken);
 
         let decoded;
         try {
-            decoded = jwt.verify(actualToken, JWT_SECRET);
+            decoded = jwt.verify(actualToken, process.env.JWT_SECRET); // ✅ correct
             console.log("🔹 Decoded JWT:", decoded);
         } catch (err) {
             console.error(" Token verification failed:", err.message);

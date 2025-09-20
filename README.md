@@ -75,4 +75,15 @@ Failure Response (401 – Wrong credentials):
    Method: GET
    URL: http://localhost:5000/api/users/me
    Headers:
-   Authorization: Bearer <paste_token_here>
+   Authorization: Bearer Token
+   Token: <paste_token_here>
+   {
+   "message": "Welcome test, you are authorized!",
+   "user": {
+   "\_id": "68cd56dd1b22fe2696d68956",
+   "username": "test",
+   "email": "test@gmail.com",
+   "createdAt": "2025-09-19T13:13:01.613Z",
+   "\_\_v": 0
+   }
+   }

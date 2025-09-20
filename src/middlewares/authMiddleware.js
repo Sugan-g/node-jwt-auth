@@ -5,7 +5,6 @@ import User from '../models/User.js';
 export const authUser = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization || '';
-        console.log("🔹 Auth Header:", authHeader);
 
         if (!authHeader) {
             return res.status(401).json({
@@ -29,12 +28,11 @@ export const authUser = async (req, res, next) => {
         if (actualToken.startsWith("Bearer")) {
             actualToken = actualToken.slice(7); // remove extra Bearer
         }
-        console.log("Extracted Token:", actualToken);
 
         let decoded;
         try {
             decoded = jwt.verify(actualToken, process.env.JWT_SECRET); // ✅ correct
-            console.log("🔹 Decoded JWT:", decoded);
+
         } catch (err) {
             console.error(" Token verification failed:", err.message);
             return res.status(401).json({
@@ -45,7 +43,6 @@ export const authUser = async (req, res, next) => {
         }
 
         const user = await User.findById(decoded.id).select("-password");
-        console.log("User from DB:", user);
 
         if (!user) {
             return res.status(404).json({
